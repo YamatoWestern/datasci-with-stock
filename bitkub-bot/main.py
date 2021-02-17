@@ -1,19 +1,23 @@
 import json
 import time
 
-from bitkub-api.py import *
+from bitkub_caller import *
 
+
+configs = [None]
 
 def load_config():
-    with open('config.py', 'r' as f):
-        configs = json.load(f)
+    with open('config.json', 'r') as f:
+        configs[0] = json.load(f)
+
 
 def func():
-    print(configs['API_KEY'])
-    print(configs['API_SECRET'])
+    c = url_caller(URL_API)
+    print(c.get_obj())
+
 
 if __name__ == '__main__':
+    load_config()
     while True:
-        load_config()
         func()
         time.sleep(60)
