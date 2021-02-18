@@ -3,10 +3,15 @@ import hmac
 import json
 import requests
 
+with open('config.json', 'r') as f:
+    config = json.load(f)
+
 # API info
 API_HOST = 'https://api.bitkub.com'
-API_KEY = 'YOUR API KEY'
-API_SECRET = b'YOUR API SECRET'
+API_KEY = config['API_KEY']
+API_SECRET = bytearray()
+API_SECRET.extend(map(ord, config['API_SECRET']))
+# API_KEY = config['API_SECRET']
 
 def json_encode(data):
 	return json.dumps(data, separators=(',', ':'), sort_keys=True)
